@@ -116,13 +116,6 @@ after inactivity — regular pings keep the server awake.
 
 Authenticated routes require `Authorization: Bearer <token>`.
 
-## ⚠️ Security notes (by design, per project requirements)
-
-- **Passwords are stored as plain text**, not hashed. Fine for a small
-  personal project with trusted users; risky if this ever gets real users
-  who reuse passwords elsewhere. Easy to switch to `bcrypt` later if needed.
-- Password-reset emails are sent from your **personal Gmail account** via an
-  App Password — recipients will see your real Gmail address as the sender.
 
 ## Common gotchas
 
