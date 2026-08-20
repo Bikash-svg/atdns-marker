@@ -8,13 +8,6 @@ Express + MongoDB backend for the Attendance Calculator web app.
 - Forgot-password flow via email (Gmail SMTP)
 - `/api/health` route for UptimeRobot or any uptime monitor
 
-## ⚠️ Security note
-Passwords are stored **as plain text** in MongoDB, per the project spec. This
-means anyone with database access — or anyone who gets hold of a DB backup or
-leak — can read every user's password directly. This is fine for a personal/
-hobby project with a handful of trusted users, but if this app ever has real
-users who reuse passwords elsewhere, it's worth switching to `bcrypt` hashing
-(a few lines in `models/User.js` and `routes/auth.js`).
 
 ## 1. Install dependencies
 ```bash
