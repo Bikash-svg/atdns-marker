@@ -6,7 +6,7 @@
 
   // ---- CONFIGURE THIS ----
   // Set this to your deployed backend URL, e.g. "https://your-app.onrender.com/api"
-  var API_BASE_URL =  'https://atdns-backend.onrender.com/api';
+  var API_BASE_URL =  'https://atdns-marker.onrender.com/api';
 
   var TOKEN_KEY = "attendanceAuthToken";
   var EMAIL_KEY = "attendanceAuthEmail"; // just the email, for display — never the password
