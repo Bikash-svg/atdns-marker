@@ -8,7 +8,7 @@ cross-device syncing.
 
 ```
 attendance-cal/
-├── attendance-backend/     Node.js + Express + MongoDB API
+├── backend/     Node.js + Express + MongoDB API
 │   ├── server.js
 │   ├── routes/              auth.js, data.js, health.js
 │   ├── models/               User.js, AttendanceData.js
@@ -17,7 +17,7 @@ attendance-cal/
 │   ├── .env.example         Copy to .env and fill in your own values
 │   └── README.md            Full backend setup instructions
 │
-└── attendance-frontend/    The web app itself (no build step)
+└── frontend/    The web app itself (no build step)
     ├── index.html
     ├── style.css
     ├── script.js             Original app logic (2 small sync hooks added)
@@ -34,7 +34,7 @@ HTML/CSS/JS — no `npm install`, no build step.
 
 ### 1. Backend
 ```bash
-cd attendance-backend
+cd backend
 npm install
 cp .env.example .env
 # fill in .env — see checklist below
@@ -44,7 +44,7 @@ Runs on `http://localhost:5000` by default.
 
 ### 2. Frontend
 ```bash
-cd attendance-frontend
+cd frontend
 npx serve .
 ```
 Open the URL it gives you. Before it can talk to the backend, set the API
@@ -119,7 +119,7 @@ Authenticated routes require `Authorization: Bearer <token>`.
 
 ## Common gotchas
 
-- `npm install` only applies inside **`attendance-backend/`** — the frontend
+- `npm install` only applies inside **`backend/`** — the frontend
   has no `package.json` and needs no install step.
 - If login/sync silently doesn't work, double-check `API_BASE_URL` in
   `auth.js` matches your backend's actual URL, and that the frontend's

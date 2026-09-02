@@ -11,7 +11,7 @@ Express + MongoDB backend for the Attendance Calculator web app.
 
 ## 1. Install dependencies
 ```bash
-cd attendance-backend
+cd backend
 npm install
 ```
 

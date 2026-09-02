@@ -28,7 +28,7 @@ var API_BASE_URL = "http://localhost:5000/api";
 - **Logout:** just clears the session token locally — your data stays on the device and on the server, untouched.
 
 ## Testing locally
-1. Run the backend (`npm run dev` inside `attendance-backend/`, listening on `http://localhost:5000`).
+1. Run the backend (`npm run dev` inside `backend/`, listening on `http://localhost:5000`).
 2. Serve this frontend folder with any static server, e.g.:
    ```bash
    npx serve .

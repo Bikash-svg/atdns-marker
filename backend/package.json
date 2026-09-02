@@ -1,5 +1,5 @@
 {
-  "name": "attendance-backend",
+  "name": "backend",
   "version": "1.0.0",
   "description": "Backend for the Attendance Calculator web app — auth, per-user data sync, health check for UptimeRobot.",
   "main": "server.js",
