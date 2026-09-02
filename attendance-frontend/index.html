@@ -59,16 +59,12 @@
         </div>
         <div class="today-scroll" id="todayScroll"></div>
  
-        <div class="add-extra-row" id="addExtraRow">
+        <div class="add-extra-row today-actions-row">
+          <button class="mark-holiday-btn" id="markHolidayBtn"></button>
           <button class="add-extra-trigger" id="addExtraTrigger">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             Add extra class
           </button>
-          <div class="add-extra-form" id="addExtraForm">
-            <input type="text" id="extraSubjectInput" placeholder="Subject name…" maxlength="40">
-            <button class="btn btn-primary" id="extraAddBtn">Add</button>
-            <button class="btn btn-secondary" id="extraCancelBtn">Cancel</button>
-          </div>
         </div>
       </div>
  
@@ -85,6 +81,17 @@
         </div>
         <div class="cal-grid" id="calDow"></div>
         <div class="cal-grid" id="calGrid" style="margin-top:4px;"></div>
+
+        <div class="predict-toggle-row">
+          <div class="predict-toggle-text">
+            <div class="setting-label" style="text-align:left;">Predict my attendance</div>
+            <div class="setting-desc">Unlock upcoming dates to see how marking them would affect your %</div>
+          </div>
+          <button class="pill-switch" id="predictModeSwitch" role="switch" aria-checked="false" aria-label="Predict my attendance">
+            <span class="pill-switch-knob"></span>
+          </button>
+        </div>
+
         <div class="cal-legend">
           <div class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--good-soft)"></span>All attended</div>
           <div class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--warn-soft)"></span>Partial</div>
@@ -109,6 +116,25 @@
     <!-- SCHEDULE -->
     <section class="view pages" id="view-schedule">
       <h2 class="section-title">Weekly schedule</h2>
+
+      <!-- My Classes: a reusable catalog, built once, picked from per-day -->
+      <div class="io-pod">
+        <button class="myclasses-toggle" id="myClassesToggle" aria-expanded="false">
+          <div class="myclasses-toggle-left">
+            <div class="io-pod-title" style="margin-bottom:0;">📚 My Classes</div>
+            <div class="io-pod-desc">Add all your classes once, then quickly assign them to days</div>
+          </div>
+          <svg class="myclasses-toggle-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="myclasses-collapse" id="myClassesCollapse">
+          <div class="chip-row" id="myClassesList" style="margin-top:10px;"></div>
+          <div class="add-row" style="margin-top:10px;">
+            <input type="text" id="myClassInput" placeholder="Class name…" maxlength="40">
+            <button class="btn btn-primary" id="myClassAddBtn">Add</button>
+          </div>
+        </div>
+      </div>
+
       <div id="scheduleList"></div>
     </section>
  
@@ -132,6 +158,28 @@
         </div>
       </div>
 
+      <!-- <h2 class="section-title">Appearance</h2> -->
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">Theme</div>
+          <div class="setting-desc">Choose light, dark, or match your system</div>
+        </div>
+        <div class="seg-control" id="themeSeg">
+          <button class="seg-btn" data-theme="light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+            Light
+          </button>
+          <button class="seg-btn" data-theme="dark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+            Dark
+          </button>
+          <button class="seg-btn" data-theme="system">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
+            Auto
+          </button>
+        </div>
+      </div>
+      
       <!-- Account / sync -->
       <div class="io-pod" id="accountPod">
         <div class="io-pod-title">👤 Account</div>
@@ -161,35 +209,23 @@
           <button class="btn btn-secondary" id="logoutBtn" style="margin-top:8px;">Log out</button>
         </div>
       </div>
-
-      <!-- <h2 class="section-title">Appearance</h2> -->
-      <div class="setting-row">
-        <div>
-          <div class="setting-label">Theme</div>
-          <div class="setting-desc">Choose light, dark, or match your system</div>
-        </div>
-        <div class="seg-control" id="themeSeg">
-          <button class="seg-btn" data-theme="light">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
-            Light
-          </button>
-          <button class="seg-btn" data-theme="dark">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
-            Dark
-          </button>
-          <button class="seg-btn" data-theme="system">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
-            Auto
-          </button>
-        </div>
-      </div>
- 
+      
       <!-- Color scheme picker -->
       <div class="setting-row" style="align-items:stretch;">
         <div style="width:100%;">
-          <div class="setting-label">Color scheme</div>
-          <div class="setting-desc">Choose a palette for the UI</div>
-          <div class="scheme-grid" id="schemeGrid"></div>
+          <button class="scheme-toggle" id="schemeToggle" aria-expanded="false">
+            <div class="scheme-toggle-left">
+              <div class="setting-label">Color scheme</div>
+              <div class="setting-desc">Choose a palette for the UI</div>
+            </div>
+            <div class="scheme-toggle-right">
+              <span class="scheme-toggle-current" id="schemeCurrentLabel"></span>
+              <svg class="scheme-toggle-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </button>
+          <div class="scheme-collapse" id="schemeCollapse">
+            <div class="scheme-grid" id="schemeGrid"></div>
+          </div>
         </div>
       </div>
  
@@ -228,17 +264,19 @@
             Share
           </button>
         </div>
+        <div class="export-saved-path" id="exportSavedPath"></div>
  
         <button class="io-dropdown-toggle" id="ioDropdownToggle">
           <span>How does this work?</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="io-dropdown-content" id="ioDropdownContent">
-          <p><strong>Export</strong> saves all your data — schedule, attendance records, extra classes, and semester start date — as a <code>.json</code> file. Keep it as a backup or to transfer to another device. If your device supports it, a <strong>Share</strong> option will appear so you can send the file directly via WhatsApp, email, Drive, or any other app.</p>
+          <p><strong>Export</strong> saves all your data — schedule, attendance records, extra classes, and semester start date — as a <code>.json</code> file to your phone's Documents folder, visible in your file manager app. If your device supports it, a <strong>Share</strong> option will also appear so you can send the file directly via WhatsApp, email, Drive, or any other app.</p>
           <p><strong>Import</strong> replaces all current data with the contents of a previously exported file. <strong>Warning:</strong> this overwrites everything, so export first if you need to keep the current data.</p>
           <p>Your data stays on your device — no internet or cloud storage is used.</p>
         </div>
       </div>
+ 
  
       <div class="setting-row reset-pod">
         <div>
@@ -277,25 +315,60 @@
     <button class="modal-close" id="dayModalClose" aria-label="Close">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
-    <div class="modal-handle" id="modalHandle"></div>
     <div class="modal-title" id="dayModalTitle">Date</div>
     <div class="modal-sub" id="dayModalSub"></div>
     <div id="dayModalBody"></div>
-    <div class="modal-add-extra" id="modalAddExtraRow">
+    <div class="modal-add-extra">
       <button class="add-extra-trigger" id="modalAddExtraTrigger">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         Add extra class
       </button>
-      <div class="add-extra-form" id="modalAddExtraForm">
-        <input type="text" id="modalExtraSubjectInput" placeholder="Subject name…" maxlength="40">
-        <button class="btn btn-primary" id="modalExtraAddBtn">Add</button>
-        <button class="btn btn-secondary" id="modalExtraCancelBtn">Cancel</button>
-      </div>
     </div>
     <div style="height:6px;"></div>
   </div>
 </div>
  
+<!-- Add extra class for a specific date: pick from My Classes, or write a new one -->
+<div class="modal-overlay" id="addExtraModalOverlay">
+  <div class="modal-sheet">
+    <button class="modal-close" id="addExtraModalClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="modal-title">Add extra class</div>
+    <div class="modal-sub" id="addExtraModalSub"></div>
+    <div class="add-subject-section-label">From your classes</div>
+    <div class="chip-row" id="addExtraChipList"></div>
+    <div class="add-subject-divider">or write a new one</div>
+    <div class="add-row">
+      <input type="text" id="addExtraWriteInput" list="allSubjectsDatalist" placeholder="Class name…" maxlength="40">
+      <button class="btn btn-primary" id="addExtraWriteBtn">Add</button>
+    </div>
+    <div style="height:6px;"></div>
+  </div>
+</div>
+ 
+<!-- Add subject to a day: pick from My Classes, or write a new one -->
+<div class="modal-overlay" id="addSubjectModalOverlay">
+  <div class="modal-sheet">
+    <button class="modal-close" id="addSubjectModalClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="modal-handle"></div>
+    <div class="modal-title">Add a class</div>
+    <div class="modal-sub" id="addSubjectModalSub"></div>
+    <div class="add-subject-section-label">From your classes</div>
+    <div class="chip-row" id="addSubjectChipList"></div>
+    <div class="add-subject-divider">or write a new one</div>
+    <div class="add-row">
+      <input type="text" id="addSubjectWriteInput" list="allSubjectsDatalist" placeholder="Class name…" maxlength="40">
+      <button class="btn btn-primary" id="addSubjectWriteBtn">Add</button>
+    </div>
+    <div style="height:6px;"></div>
+  </div>
+</div>
+ 
+<datalist id="allSubjectsDatalist"></datalist>
+
 <div class="toast" id="toast"></div>
 
 <!-- <script src="capacitor-bridge.js"></script> -->
