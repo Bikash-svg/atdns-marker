@@ -46,4 +46,4 @@ async function sendResetEmail(toEmail, resetLink) {
   });
 }
 
-module.exports = { sendResetEmail };
+module.exports = { sendResetEmail, getTransporter };

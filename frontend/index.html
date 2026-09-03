@@ -127,6 +127,13 @@
           <svg class="myclasses-toggle-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="myclasses-collapse" id="myClassesCollapse">
+          <div class="myclasses-sync-row">
+            <span class="myclasses-sync-hint">Missing a class you already added to a day?</span>
+            <button class="myclasses-sync-btn" id="myClassesSyncBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+              Sync
+            </button>
+          </div>
           <div class="chip-row" id="myClassesList" style="margin-top:10px;"></div>
           <div class="add-row" style="margin-top:10px;">
             <input type="text" id="myClassInput" placeholder="Class name…" maxlength="40">
@@ -137,13 +144,14 @@
 
       <div id="scheduleList"></div>
     </section>
- 
+    
     <!-- SETTINGS -->
+    
     <section class="view pages" id="view-settings">
       <div class="io-pod">
         <div class="io-pod-title">ℹ️ How this app works</div>
         <div class="io-pod-desc">A quick guide to setting up and using your attendance tracker.</div>
-
+        
         <button class="io-dropdown-toggle" id="howItWorksToggle">
           <span>Show me how to use it</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -157,13 +165,14 @@
           <p>Everything is stored locally on your device — nothing is uploaded anywhere.</p>
         </div>
       </div>
-
+      
       <!-- <h2 class="section-title">Appearance</h2> -->
       <div class="setting-row">
         <div>
           <div class="setting-label">Theme</div>
           <div class="setting-desc">Choose light, dark, or match your system</div>
         </div>
+        
         <div class="seg-control" id="themeSeg">
           <button class="seg-btn" data-theme="light">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
@@ -180,11 +189,12 @@
         </div>
       </div>
       
+      
       <!-- Account / sync -->
       <div class="io-pod" id="accountPod">
         <div class="io-pod-title">👤 Account</div>
         <div class="io-pod-desc" id="accountDesc">Sign in to sync your attendance data across devices.</div>
-
+  
         <!-- Logged-out state -->
         <div id="authLoggedOut">
           <div class="setting-desc" id="authFormError" style="color:#B3261E; display:none; margin-bottom:8px;"></div>
@@ -202,13 +212,14 @@
             <button class="btn btn-secondary" id="sendResetBtn">Send reset link</button>
           </div>
         </div>
-
+  
         <!-- Logged-in state -->
         <div id="authLoggedIn" style="display:none;">
           <div class="setting-desc">Signed in as <strong id="authUserEmail"></strong></div>
           <button class="btn btn-secondary" id="logoutBtn" style="margin-top:8px;">Log out</button>
         </div>
       </div>
+      
       
       <!-- Color scheme picker -->
       <div class="setting-row" style="align-items:stretch;">
@@ -276,7 +287,6 @@
           <p>Your data stays on your device — no internet or cloud storage is used.</p>
         </div>
       </div>
- 
  
       <div class="setting-row reset-pod">
         <div>

@@ -1829,6 +1829,37 @@ html.dark.scheme-obsidianpurple {
   max-height: 500px;
 }
 
+.myclasses-sync-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 10px;
+}
+.myclasses-sync-hint {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  line-height: 1.3;
+}
+.myclasses-sync-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  border-radius: 100px;
+  border: 1.5px dashed var(--border);
+  background: none;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12.5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.myclasses-sync-btn svg { width: 13px; height: 13px; }
+.myclasses-sync-btn:active { transform: scale(0.96); }
+
 /* ---- Add-subject popup (My Classes picker + write-new) ---- */
 .add-subject-section-label {
   font-size: 11px;

@@ -1181,6 +1181,31 @@
   }
 
   // ---- My Classes catalog (a reusable list, separate from any day) ----
+  // Reconciles My Classes with whatever subjects actually exist across the
+  // weekly schedule. Covers any way a subject could end up scheduled
+  // without going through the "write a new class" popup — e.g. restoring
+  // an older backup, or data pulled in from a synced account. Returns how
+  // many new classes were pulled in.
+  function syncMyClassesFromSchedule() {
+    if (!state.myClasses) state.myClasses = [];
+    var known = {};
+    state.myClasses.forEach(function(s) { known[s.toLowerCase()] = true; });
+
+    var addedCount = 0;
+    state.schedule.forEach(function(day) {
+      day.subjects.forEach(function(s) {
+        var key = s.toLowerCase();
+        if (!known[key]) {
+          known[key] = true;
+          state.myClasses.push(s);
+          addedCount++;
+        }
+      });
+    });
+    if (addedCount > 0) saveData();
+    return addedCount;
+  }
+
   function renderMyClasses() {
     var list = document.getElementById('myClassesList');
     if (!list) return;
@@ -1219,6 +1244,20 @@
       var isOpen = collapse.classList.toggle('open');
       this.classList.toggle('open', isOpen);
       this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+
+  var myClassesSyncBtn = document.getElementById('myClassesSyncBtn');
+  if (myClassesSyncBtn) {
+    myClassesSyncBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var added = syncMyClassesFromSchedule();
+      renderMyClasses();
+      if (added > 0) {
+        showToast('Synced ' + added + ' class' + (added > 1 ? 'es' : '') + ' from your weekly schedule');
+      } else {
+        showToast('Already up to date');
+      }
     });
   }
 
